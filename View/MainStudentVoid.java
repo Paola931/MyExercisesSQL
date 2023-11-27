@@ -70,14 +70,13 @@ public class MainStudentVoid {
         }
     }
 
-    public static void getLastName() throws RuntimeException {
+   public static ArrayList<String> getLastName() throws RuntimeException {
+        ArrayList<String> lastNames = new ArrayList<>();
         try (Connection c = DriverManager.getConnection(URL, USER, PASSWORD)) {
             Statement s = c.createStatement();
 
             String q1 = "SELECT last_name FROM students";
             ResultSet result = s.executeQuery(q1);
-
-            ArrayList<String> lastNames = new ArrayList<>();
 
             while (result.next()) {
                 String ln = result.getString("last_name");
@@ -91,6 +90,7 @@ public class MainStudentVoid {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return lastNames;
     }
     public static void addCountryCol() {
         try (Connection c = DriverManager.getConnection(URL, USER, PASSWORD)) {
