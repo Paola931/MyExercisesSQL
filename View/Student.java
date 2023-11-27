@@ -54,14 +54,13 @@ public class Student {
             int result = s.executeUpdate(q);
         }
     }
-    public static void getItStudents ()throws RuntimeException {
+ public static ArrayList<String> getItStudents ()throws RuntimeException {
+        ArrayList<String> italianStudents = new ArrayList<>();
         try (Connection c = DriverManager.getConnection(URL, USER, PASSWORD)) {
             Statement s = c.createStatement();
 
             String q1 = "SELECT * FROM italian_students";
             ResultSet result = s.executeQuery(q1);
-
-            ArrayList<String> italianStudents = new ArrayList<>();
 
             while (result.next()) {
                 String name = result.getString("first_name");
@@ -77,15 +76,15 @@ public class Student {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return italianStudents;
     }
-    public static void getGeStudents ()throws RuntimeException {
+    public static ArrayList<String> getGeStudents ()throws RuntimeException {
+        ArrayList<String> germanStudents = new ArrayList<>();
         try (Connection c = DriverManager.getConnection(URL, USER, PASSWORD)) {
             Statement s = c.createStatement();
 
             String q1 = "SELECT * FROM german_students";
             ResultSet result = s.executeQuery(q1);
-
-            ArrayList<String> germanStudents = new ArrayList<>();
 
             while (result.next()) {
                 String name = result.getString("first_name");
@@ -101,5 +100,6 @@ public class Student {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return germanStudents;
     }
 }
